@@ -1,0 +1,224 @@
+/*---------- utility CSS ----------*/
+.flex{
+    display: flex;
+}
+/*-----------------------------------*/
+
+header{
+    margin-bottom: 1em;
+    padding: 0;
+}
+
+
+body{
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.heading{
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(93, 244, 176);
+    padding: 1em;
+    margin: 0;
+}
+
+
+.form-class{
+    width: 30vw;
+    margin: auto;
+    padding: 2em;
+    border-radius: 1em;
+    border: 3px solid #4fb386;
+}
+
+.prompt{
+    color: rgb(247, 0, 0);
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-input{
+    width: 100%;
+    padding: 0.3em;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    border-radius: 5px;
+    border: 2px solid silver;
+}
+.form-input #Category{
+    width: 102.5%;
+}
+
+.form-input:focus{
+    outline: none;
+    border: 2px solid rgb(93, 244, 176);
+}
+
+.submitBtn{
+    margin-top: 0.5em;
+    padding: 0.3em;
+    width: 40%;
+    background-color: rgb(93, 244, 176);
+    border-radius: 6px;
+}
+.submitBtn:hover{
+    background-color: rgb(61, 158, 114);
+}
+
+.buyPremium{
+    top: 16em;
+    position: absolute;
+    right: 14em;
+    width: 9em;
+    padding: 9px;
+    background-color: #eecf23;
+    border-radius: 12px;
+    border: 1px solid #9B8300;
+}
+.buyPremium:hover{
+    background: -moz-linear-gradient(top, #c9b023 0%, #e7ca27 50%, #d1b61d 51%, #e8d56d 100%);
+}
+
+.premiumUser{
+    top: 1em;
+    position: absolute;
+    right: 2em;
+    width: 9em;
+    padding: 9px;
+    background-color: rgb(50, 143, 101);
+    border-radius: 12px;
+    border: 1px solid rgb(48, 130, 93);
+    text-align: center;
+    color: white;
+}
+
+.leaderboard{
+    list-style-type: none;
+    margin: auto;
+    width: 40%;
+    padding: 0.4em;
+    border: 2px solid rgb(60, 167, 142);
+    border-radius: 1em;
+    margin-top: 1em;
+    background-color: rgb(193, 240, 219);
+}
+
+.leaderboardBtnClass{
+    position: absolute;
+    top: 15em;
+    left: 7em;
+    width: 9em;
+    padding: 9px;
+    background-color: rgb(93, 244, 209);
+    border-radius: 12px;
+}
+.leaderboardBtnClass:hover{
+    background-color: aquamarine;
+}
+
+.leaderboardLi{
+    border: 2px solid rgb(73, 208, 148);
+    border-radius: 0.6em;
+    padding: 0.3em;
+    margin-top: 0.6em;
+    background-color: rgb(107, 249, 185);;
+}
+
+.rowNoSelector{
+    margin: auto;
+    width: 57%;
+}
+
+.expenseList{
+    list-style-type: none;
+    margin: auto;
+    width: 60%;
+}
+
+.expensePageBtns{
+    width: 10%;
+    margin: auto;
+    list-style-type: none;
+    margin-top: 9px;
+}
+.expensePageBtns button{
+    margin-right: 3px;
+}
+
+.incomePageBtns{
+    width: 10%;
+    margin: auto;
+    list-style-type: none;
+    margin-top: 9px;
+}
+.incomePageBtns button{
+    margin-right: 3px;
+}
+
+.currentPaginationBtn{
+    padding-top:8px;
+    padding-bottom:8px;
+    border-radius: 5px;
+}
+
+.incomeList{
+    list-style-type: none;
+    margin: auto;
+    width: 60%;
+}
+
+/* .ul-h{
+    text-align: center;
+} */
+
+.listItemExp{
+    border: 2px solid silver;
+    border-radius: 0.6em;
+    padding: 0.5em;
+    margin-top: 1em;
+}
+.listItemExp:hover{
+    border: 2px solid rgb(93, 244, 176);
+}
+
+.listItemInc{
+    border: 2px solid silver;
+    border-radius: 0.6em;
+    padding: 0.5em;
+    margin-top: 1em;
+}
+.listItemInc:hover{
+    border: 2px solid rgb(93, 244, 176);
+}
+
+
+.delBtn{
+    background-color: rgb(241, 55, 55);
+    position: relative;
+    float: right;
+    bottom: 3em;
+    padding: 7px;
+    margin-left: 7px;
+    border-radius: 5px;
+    width: 4vw;
+}
+.delBtn:hover{
+    background-color: rgb(191, 42, 42);
+}
+
+.editBtn{
+    background-color: rgb(246, 246, 69);
+    position: relative;
+    float: right;
+    bottom: 3em;
+    padding: 7px;
+    margin-left: 7px;
+    border-radius: 5px;
+    width: 4vw;   
+}
+.editBtn:hover{
+    background-color: rgb(195, 195, 51);
+}
+
