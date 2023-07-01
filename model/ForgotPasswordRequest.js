@@ -6,6 +6,11 @@ const ForgotPasswordRequestSchema = new Schema({
     isActive : {
         type : Boolean,
         required : true
+    },
+    userId : {
+        type : mongoose.Types.ObjectId,
+        required : true,
+        ref : 'User'
     }
 });
 

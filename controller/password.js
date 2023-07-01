@@ -25,15 +25,8 @@ exports.postForgotPassword = async(req,res,next)=>{
         if(!user){
             return res.json({msg:'User with this email has not signed up'})
         }
-        // // making a uuid to send in link to user
-        // let id = uuid.v4()
-        // saving in ForgotPasswordRequests in user
-        // let newArr = [...user.forgotPasswordRequests]
-        // newArr.push({isActive : true})
-        // user.forgotPasswordRequests = [...newArr]
-        // // saving user
-        // await user.save()
-        let newReq = await ForgotPasswordRequest.create({isActive : true})
+        
+        let newReq = await ForgotPasswordRequest.create({isActive : true,userId : user._id})
 
         // saving id of this request
         let id = newReq._id;
@@ -85,10 +78,10 @@ exports.postResetPassword = async(req,res,next)=>{
         let newPassword = req.body.password
         bcrypt.hash(newPassword,10,async(err,hash)=>{
             // updating user with new password
-            await User.updateOne({id:passRes.UserId},{password:hash})
+            await User.updateOne({_id:passRes.userId},{password:hash})
 
             // setting isActive in ForgotPasswordRequest to false
-            await ForgotPasswordRequest.updateOne({id : id},{isActive:false})
+            await ForgotPasswordRequest.updateOne({_id : id},{isActive:false})
 
         })
         res.json({msg:'Password reseting is successful'})
