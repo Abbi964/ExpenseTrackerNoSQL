@@ -18,27 +18,25 @@ exports.getforgotPassword = (req,res,next)=>{
 }
 
 exports.postForgotPassword = async(req,res,next)=>{
-    const t = await sequelize.transaction() 
     try{
         // finding user from user table by email
-        let user = await User.findOne({
-            where:{email:req.body.email}
-        },
-        {transaction:t})
+        let user = await User.findOne({email:req.body.email})
+
         if(!user){
-            await t.rollback()
             return res.json({msg:'User with this email has not signed up'})
         }
-        // making a uuid to send in link to user
-        let id = uuid.v4()
-        // saving in ForgotPasswordRequest table
-        await ForgotPasswordRequest.create({
-            id:id,
-            isActive:true,
-            UserId:user.id,
-        },
-        {transaction:t})
+        // // making a uuid to send in link to user
+        // let id = uuid.v4()
+        // saving in ForgotPasswordRequests in user
+        // let newArr = [...user.forgotPasswordRequests]
+        // newArr.push({isActive : true})
+        // user.forgotPasswordRequests = [...newArr]
+        // // saving user
+        // await user.save()
+        let newReq = await ForgotPasswordRequest.create({isActive : true})
 
+        // saving id of this request
+        let id = newReq._id;
         // making a new tansactional email instence
         const tranEmailApi = new SibApiV3Sdk.TransactionalEmailsApi();
         
@@ -58,13 +56,11 @@ exports.postForgotPassword = async(req,res,next)=>{
             to: receivers,
             subject: 'Reset your password',
             htmlcontent: `<p>To reset your password<a href="http://localhost:3000/password/resetPassword/${id}" > click here</a></p>`
-        },
-        {transaction:t})
-        await t.commit()
-        res.json({msg:'An email with link to reset your password has been sent to your email',id:result.messageId})   
+        })
+
+        res.json({msg:'An email with link to reset your password has been sent to your email',id:result.messageId,reqId : id})   
     }
     catch(err){
-        await t.rollback()
         console.log(err)
     }
 }
@@ -72,7 +68,7 @@ exports.postForgotPassword = async(req,res,next)=>{
 exports.getResetPassword = async(req,res,next)=>{
     let id = req.params.id;
     // checking if request is active
-    let passRes = await ForgotPasswordRequest.findByPk(id);
+    let passRes = await ForgotPasswordRequest.findById(id);
     if(passRes.isActive===false){
         res.status(404).send('<html><head></head><body><h1>request is not active</h1></body></html>')
     }
@@ -82,39 +78,22 @@ exports.getResetPassword = async(req,res,next)=>{
 }
 
 exports.postResetPassword = async(req,res,next)=>{
-    const t = sequelize.transaction()
     try{
         let id = req.params.id;
         // finding user with this ResetPasswordId
-        let passRes = await ForgotPasswordRequest.findByPk(id,{transaction:t});
+        let passRes = await ForgotPasswordRequest.findById(id);
         let newPassword = req.body.password
         bcrypt.hash(newPassword,10,async(err,hash)=>{
             // updating user with new password
-            await User.update({
-                password:hash
-            },
-            {
-                where:{id:passRes.UserId},
-            },
-            {
-                transaction:t,
-            })
+            await User.updateOne({id:passRes.UserId},{password:hash})
+
             // setting isActive in ForgotPasswordRequest to false
-            await ForgotPasswordRequest.update({
-                isActive:false,
-            },
-            {
-                where:{id:id}
-            },
-            {
-                transaction:t,
-            })
+            await ForgotPasswordRequest.updateOne({id : id},{isActive:false})
+
         })
-        await t.commit()
         res.json({msg:'Password reseting is successful'})
     }
     catch(err){
-        await t.rollback()
         console.log(err)
     }
 }
