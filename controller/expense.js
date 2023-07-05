@@ -1,4 +1,4 @@
-// const sequelize = require('../util/database')
+
 
 const path = require('path');
 const Expense = require('../model/expense');

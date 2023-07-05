@@ -23,25 +23,3 @@ const expenseSchema = new Schema({
 
 module.exports = mongoose.model('Expense', expenseSchema)
 
-// const Expense = sequelize.define('expense',{
-//     id:{
-//         type: Sequelize.INTEGER,
-//         allowNull: false,
-//         autoIncrement: true,
-//         primaryKey: true,
-//     },
-//     amount:{
-//         type:Sequelize.INTEGER,
-//         allowNull: false,
-//     },
-//     category:{
-//         type:Sequelize.STRING,
-//         allowNull:false,
-//     },
-//     description:{
-//         type:Sequelize.STRING,
-//         allowNull:false,
-//     }
-// })
-
-// module.exports = Expense
